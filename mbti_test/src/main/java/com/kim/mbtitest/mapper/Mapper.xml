@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.kim.mbtitest.dao.iMbtiDao">
+
+	<!-- 회원가입 -->
+	<insert id = "join" parameterType = "com.kim.mbtitest.dto.MbtiUserDto">
+		INSERT INTO MBTIUSER (MID, MNAME, MPW, MBTI, MNICKNAME) 
+		VALUES (MBTIUSER_SEQ.nextval, #{mName}, #{mPw}, #{mbti}, #{mNickname})
+	</insert>
+	
+	<!-- 닉네임 중복체크 -->
+	<select id = "nameCheck" parameterType = "String" resultType = "int">
+		SELECT COUNT (mNickname) FROM MBTIUSER WHERE MNICKNAME = #{mNickname}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id = "login" parameterType = "String" resultType = "com.kim.mbtitest.dto.MbtiUserDto">
+		SELECT * FROM MBTIUSER WHERE MNAME = #{mName}
+	</select>
+</mapper>
